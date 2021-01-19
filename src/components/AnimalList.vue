@@ -3,14 +3,14 @@
         Animal List
         <table>
             <tr>
-                <th>Vrsta: </th>
-                <th>Ime: </th>
-                <th>Datum: </th>
+                <th>Species: </th>
+                <th>Name: </th>
+                <th>Date: </th>
             </tr>
             <tr v-for="({species, name, date}, index) in animals" :key="index">
                 <td>{{species}}</td>
                 <td>{{name}}</td>
-                <td>{{date}}</td>
+                <td>{{date ? date : "Unknown"}}</td>
             </tr>
         </table>
     </div>
@@ -50,7 +50,6 @@ export default {
         ]
         }
     }
-    
 }
 </script>
 
