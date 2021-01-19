@@ -12,6 +12,7 @@
                 <td>{{name}}</td>
                 <td>{{date ? date : "Unknown"}}</td>
                 <td><button @click="removeAnimal(index)">Remove</button></td>
+                <td><button @click="moveToTop(index)">Move to top</button></td>
             </tr>
         </table>
     </div>
@@ -54,6 +55,12 @@ export default {
     methods: {
         removeAnimal(indexToRemove) {
             this.animals = this.animals.filter((animal, index) => index !== indexToRemove)
+        },
+        moveToTop(indexToMove) {
+            const animalToMove = this.animals[indexToMove];
+            this.removeAnimal(indexToMove);
+            this.animals.unshift(animalToMove);
+            console.log(this.animals);
         }
     }
 }
