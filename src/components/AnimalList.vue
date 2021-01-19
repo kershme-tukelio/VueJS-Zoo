@@ -1,6 +1,7 @@
 <template>
     <div>
         Animal List
+        <animal-form @add-animal="addAnimal"></animal-form>
         <table>
             <tr>
                 <th>Species: </th>
@@ -19,8 +20,13 @@
 </template>
 
 <script>
+import AnimalForm from './AnimalForm.vue';
+
 export default {
     name: "AnimalList",
+    components: {
+        AnimalForm
+    },
     data() {
         return {
         animals: [
@@ -61,6 +67,9 @@ export default {
             this.removeAnimal(indexToMove);
             this.animals.unshift(animalToMove);
             console.log(this.animals);
+        },
+        addAnimal(newAnimal) {
+            this.animals.push(newAnimal);
         }
     }
 }
