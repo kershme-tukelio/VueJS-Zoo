@@ -11,6 +11,7 @@
                 <td>{{species}}</td>
                 <td>{{name}}</td>
                 <td>{{date ? date : "Unknown"}}</td>
+                <td><button @click="removeAnimal(index)">Remove</button></td>
             </tr>
         </table>
     </div>
@@ -48,6 +49,11 @@ export default {
                 date: new Date()
             },
         ]
+        }
+    },
+    methods: {
+        removeAnimal(indexToRemove) {
+            this.animals = this.animals.filter((animal, index) => index !== indexToRemove)
         }
     }
 }
