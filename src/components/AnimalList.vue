@@ -14,24 +14,27 @@
                 <td>{{name}}</td>
                 <td>{{date ? date : "Unknown"}}</td>
                 <td>{{sector}}</td>
-                <td><button @click="removeAnimal(index)">Remove</button></td>
                 <td><button @click="moveToTop(index)">Move to top</button></td>
+                <td><button @click="removeAnimal(index)">Remove</button></td>
             </tr>
         </table>
+        <animal-sectors :sectors="sectors" @sector-click="showAnimalsForSector" ></animal-sectors>
     </div>
 </template>
 
 <script>
 import AnimalForm from './AnimalForm.vue';
+import AnimalSectors from './AnimalSectors.vue'
 
 export default {
     name: "AnimalList",
     components: {
-        AnimalForm
+        AnimalForm,
+        AnimalSectors
     },
     data() {
         return {
-            sectors: ['dogs', 'snakes', 'cats', 'domestic'],
+            sectors: ['dogs', 'snakes', 'cats', 'domestic', 'wild', 'birds', 'bugs'],
             animals: [
             {
                 species: "Cat",
@@ -78,6 +81,15 @@ export default {
         },
         addAnimal(newAnimal) {
             this.animals.push(newAnimal);
+        },
+        showAnimalsForSector(sector) {
+            const animalsToShow = this.animals.reduce((acc, current) => {
+                if(current.sector === sector) {
+                    acc += " " + current.name;
+                }
+                return acc;
+            }, "")
+            alert(animalsToShow);
         }
     }
 }
@@ -86,10 +98,10 @@ export default {
 <style>
 
 tr {
-    border: 1px, solid, grey;
+    border: 1px, solid, black;
 }
 td {
-    border: 1px, solid, lightblue;
+    border: 1px, solid, green;
 }
 
 </style>
