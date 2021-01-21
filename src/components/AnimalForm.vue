@@ -1,14 +1,18 @@
 <template>
     <form @submit.prevent="onSubmit">
         <label for="species">Species: </label>
-        <input v-model="species" id="species" type="text" placeholder="species"><br/>
+        <input required v-model="species" id="species" type="text" placeholder="species"><br/>
 
         <label for="name">Name: </label>
-        <input v-model="name" id="name" type="text" placeholder="name"><br/>
+        <input required v-model="name" id="name" type="text" placeholder="name"><br/>
 
         <label for="date">Date: </label>
-        <input v-model="date" id="date" type="date" placeholder="Date of birth"><br/>
+        <input required v-model="date" id="date" type="date" placeholder="Date of birth"><br/>
 
+        <label for="sector">Sector: </label>
+        <select required v-model="sector" name="sector" id="sector">
+            <option v-for="(sector, index) in sectors" :key="index">{{sector}}</option>
+        </select>
         <button type="submit">Add animal</button>
     </form>
 </template>
@@ -20,16 +24,23 @@ export default {
         return {
             species: "",
             name: "",
-            date: ""
+            date: "",
+            sector: ""
         }
     },
+    props: ['sectors'],
     methods: {
         onSubmit() {
             this.$emit('add-animal', {
                 species: this.species,
                 name: this.name,
-                date: new Date(this.date)
+                date: new Date(this.date),
+                sector: this.sector
             })
+            this.species = "";
+            this.name = "";
+            this.date = "";
+            this.sector = "";
         }
     }
 }
